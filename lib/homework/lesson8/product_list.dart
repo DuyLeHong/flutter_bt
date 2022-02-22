@@ -14,19 +14,56 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  Drawer initDrawer(BuildContext context) {
+    return Drawer(
+      // Add a ListView to the drawer. This ensures the user can scroll
+      // through the options in the drawer if there isn't enough vertical
+      // space to fit everything.
+      child: ListView(
+        // Important: Remove any padding from the ListView.
+        padding: EdgeInsets.zero,
+        children: [
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: Color(0xFF9C27B0),
+            ),
+            child: Text('Drawer Header'),
+          ),
+          ListTile(
+            title: const Text('Item 1'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: const Text('Item 2'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        drawer: Builder(
+          builder: (BuildContext context) {
+            return initDrawer(context);
+          },
+        ),
         appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(
-              Icons.menu,
-              color: Colors.white,
-            ),
-            onPressed: () {},
-          ),
+          // leading: IconButton(
+          //   icon: const Icon(
+          //     Icons.menu,
+          //     color: Colors.white,
+          //   ),
+          //   onPressed: () {},
+          // ),
           title: Text("My shop"),
           backgroundColor: const Color(0xFF9C27B0),
           actions: [
@@ -52,7 +89,7 @@ class _MyAppState extends State<MyApp> {
 
 final List<Product> listProduct = [
   Product(
-      "Quần jean",
+      "Quần jean quần jean quần jean Quần jean Quần jean Quần jean Quần jean Quần jean",
       "https://cdn.shopify.com/s/files/1/0268/7841/0824/products/1053SS-white_1900x_crop_center_141b7f52-8fcb-4127-8025-3a27fcb314e8_720x.jpg?v=1618506001",
       "\$5.6",
       false),
@@ -111,7 +148,7 @@ class _ProductItemState extends State<ProductItem> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      margin: EdgeInsets.all(8),
+      margin: EdgeInsets.all(10),
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
@@ -146,6 +183,7 @@ class _ProductItemState extends State<ProductItem> {
                 Expanded(
                   child: Text(
                     product.name,
+                    maxLines: 1,
                     style: const TextStyle(
                         color: Colors.white,
                         fontStyle: FontStyle.normal,
