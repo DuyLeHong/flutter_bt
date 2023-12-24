@@ -136,10 +136,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-          if (constraints.maxWidth > 500) {
-            return const LargeScreen();
-          }
-          return const SmallScreen();
+          // if (constraints.maxWidth > 500) {
+          //   return const LargeScreen();
+          // }
+          // return const SmallScreen();
+          return const LargeScreen();
         },
       ),
     );
